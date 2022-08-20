@@ -3,11 +3,15 @@ const express = require('express');
 const dotenv = require('dotenv').config();
 const cors = require('cors');
 
+const userRouter = require('../routes/user.router');
+
 class Server{
 
     constructor(){
         //....
         this.app = express();
+        this.middleware();
+        this.routes();
     }
 
     middleware(){
@@ -17,6 +21,7 @@ class Server{
 
     routes(){
         //...
+        this.app.use(userRouter);
     }
 
     listen(){
