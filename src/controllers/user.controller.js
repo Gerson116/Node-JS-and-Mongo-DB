@@ -16,10 +16,8 @@ exports.getAllUser = async (req, res) => {
 exports.searchUserById = async (req, res) => {
     const data = await getUserById(req.params.userId);
     if(data != null && data != undefined){
-        console.log('entro')
         res.json(requestResponse("Exito", data));
     }else{
-        console.log('no entro')
         res.status(400).send(requestResponse("Ocurrio un Error", 'El usuario que intenta buscar no existe.'));
     }
 }
