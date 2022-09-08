@@ -4,13 +4,13 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema({
     //...
-    id: { type: Number },
+    id: { type: String },
     name: { type: String, required: true },
     lastname: { type: String, required: true },
     password: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     google: { type: Boolean },
-    role: { type: String },
+    role: { type: String, required: true },
     img: { type: String },
     estado: { type: Boolean, required: true }
 });
