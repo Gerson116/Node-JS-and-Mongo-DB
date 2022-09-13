@@ -1,5 +1,6 @@
 
 const express = require('express');
+const expressValidate = require('express-validator');
 const dotenv = require('dotenv').config();
 const cors = require('cors');
 const { dbConnectionDev, dbConnectionLocalHost } = require('../../database/conf.db');

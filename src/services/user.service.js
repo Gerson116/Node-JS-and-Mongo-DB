@@ -1,11 +1,11 @@
 const User = require('../models/user');
+const {validationResult} = require('express-validator');
 
 const getUserById = async (userId) => {
     //...
     try{
         //...
         const data = await User.findOne({_id: userId});
-        console.log(data);
         if(data != null){
             return data;
         }
