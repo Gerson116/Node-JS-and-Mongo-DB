@@ -1,11 +1,12 @@
 const User = require('../models/user');
+const {validationResult} = require('express-validator');
+const { encrypt, decrypting } = require('../services/crypting');
 
 const getUserById = async (userId) => {
     //...
     try{
         //...
         const data = await User.findOne({_id: userId});
-        console.log(data);
         if(data != null){
             return data;
         }
@@ -31,6 +32,8 @@ const addUser = async (newUser) => {
     //...
     try{
         const user = new User(newUser);
+        const encryptPassword = encrypt(newUser.password);
+        user.password = encryptPassword;
         await user.save();
         return true;
     }catch(error){
@@ -44,6 +47,8 @@ const editUser = async (infoUser, userId) => {
         //...
         const userExist = getUserById(userId);
         if(userExist != null){
+            const encryptPassword = encrypt(infoUser.password);
+            infoUser.password = encryptPassword;
             const user = User.findByIdAndUpdate(userId, infoUser);
             user.exec((error, data)=>{
                 if(error) throw error;
@@ -51,14 +56,35 @@ const editUser = async (infoUser, userId) => {
             return true;
         }
     }catch(error){
-        console.log(error)
+        console.log(error);
     }
     return false;
+}
+
+const blockOrActiveUser = async (userId) =>{
+    //...
+    try{
+        //...
+        let data = await getUserById(userId);
+        if(data.estado == true){
+            data.estado = false;
+        }else{
+            data.estado = true;
+        }
+        const user = User.findByIdAndUpdate(userId, data);
+        user.exec( (error, data) => {
+            if(error) throw error;
+        });
+        return data;
+    }catch(error){
+        throw new Error(`AN ERROR OCCURRED`);
+    }
 }
 
 module.exports = {
     getUser,
     getUserById,
     addUser,
-    editUser
+    editUser,
+    blockOrActiveUser
 }

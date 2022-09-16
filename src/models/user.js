@@ -10,7 +10,7 @@ const UserSchema = new Schema({
     password: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     google: { type: Boolean },
-    role: { type: String, required: true },
+    rol: { type: String, required: true },
     img: { type: String },
     estado: { type: Boolean, required: true }
 });
