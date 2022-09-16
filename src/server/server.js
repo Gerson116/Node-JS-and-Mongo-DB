@@ -10,7 +10,6 @@ const userRouter = require('../routes/user.router');
 class Server{
 
     constructor(){
-        //....
         this.app = express();
         this.dbConnection();
         this.middleware();
