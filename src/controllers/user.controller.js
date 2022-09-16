@@ -5,7 +5,6 @@ const { addUser, editUser, getUser, getUserById, blockOrActiveUser } = require('
 const { body, validationResult } = require('express-validator');
 
 exports.getAllUser = async (req, res) => {
-    //....
     const data = await getUser();
     if(data != null){
         res.json(data);
@@ -43,7 +42,6 @@ exports.putUser = async (req, res) =>{
 }
 
 exports.blockUser = async (req, res) => {
-    //...
     let resp = await blockOrActiveUser(req.params.userId);
     let actionsPerformed = (resp.estado) ? 'activo' : 'desactivo';
     if(resp != null){
