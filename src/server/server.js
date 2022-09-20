@@ -6,6 +6,7 @@ const cors = require('cors');
 const { dbConnectionDev, dbConnectionLocalHost } = require('../../database/conf.db');
 
 const userRouter = require('../routes/user.router');
+const productRouter = require('../routes/product.router');
 
 class Server{
 
@@ -19,6 +20,8 @@ class Server{
     async dbConnection(){
         //... conexión a desarrollo.
         // await dbConnectionDev();
+
+        //... conexion al local.
         await dbConnectionLocalHost();
     }
 
@@ -31,6 +34,7 @@ class Server{
     routes(){
         //...
         this.app.use(userRouter);
+        this.app.use(productRouter);
     }
 
     listen(){
